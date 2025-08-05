@@ -1,34 +1,36 @@
 # Basketball Player Stats Dashboard
-A simple and interactive web application built entirely with Python and Streamlit to explore NBA player performance across multiple seasons.
+
+This project is an interactive web application built with Python and Streamlit, designed for exploring NBA player performance across multiple seasons. It provides a dynamic and intuitive interface to visualize player statistics and gain insights into career trajectories.
 
 ## Overview
-View and compare NBA player statistics through a clean, user-friendly dashboard powered by Python. Select players from a dropdown menu to dynamically visualize their points per game by season with interactive Plotly charts.
 
-## Technologies Used
-Python — the core programming language for the app
+The dashboard enables users to browse and compare NBA players through a clean, responsive interface. By selecting a player from the sidebar, users can view detailed season-by-season statistics, such as points per game, displayed through interactive Plotly charts. The application offers a seamless experience for analyzing player progress and performance trends over time.
 
-- Streamlit — for building the interactive web interface and UI components
+## Technologies Employed
 
-- Pandas — for data loading and processing from CSV files
+The application leverages the following core technologies:
 
-- Plotly — for creating responsive, interactive charts
+- **Python** for data processing and application logic.
+- **Streamlit** to create an interactive and user-friendly web interface.
+- **Pandas** for efficient data manipulation and preparation.
+- **Plotly** to deliver rich, responsive, and interactive visualizations.
+- **Requests** and **BeautifulSoup** for web scraping and data extraction from reliable sources.
 
-## How to Use
-Install dependencies:
+## Usage Instructions
+
+To set up and run the application, first install the required dependencies:
 
 ```
-bash
-pip install streamlit pandas plotly requests BeautifulSoup re
+pip install streamlit pandas plotly requests beautifulsoup4
 ```
-Run the app:
+
+Then, launch the dashboard with the following command:
 ```
-bash
 streamlit run app.py
 ```
 
-Select a player from the sidebar to 
-see their seasonal points per game.
+or simply double click on the **start.sh** file
 
 ---
 
-This project is open source and free to use. Contributions, suggestions, and customizations are welcome!
+This project is open-source and welcomes contributions, suggestions, and customizations from the community.

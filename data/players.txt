@@ -8,3 +8,24 @@ Jayson Tatum | https://www.basketball-reference.com/players/t/tatumja01.html
 Ja Morant | https://www.basketball-reference.com/players/m/moranja01.html
 Anthony Edwards | https://www.basketball-reference.com/players/e/edwaran01.html
 Zion Williamson | https://www.basketball-reference.com/players/w/willizi01.html
+Nikola Jokic | https://www.basketball-reference.com/players/j/jokicni01.html
+Devin Booker | https://www.basketball-reference.com/players/b/bookede01.html
+Kawhi Leonard | https://www.basketball-reference.com/players/l/leonaka01.html
+Bradley Beal | https://www.basketball-reference.com/players/b/bealbr01.html
+Donovan Mitchell | https://www.basketball-reference.com/players/m/mitchdo01.html
+Jimmy Butler | https://www.basketball-reference.com/players/b/butleji01.html
+Karl-Anthony Towns | https://www.basketball-reference.com/players/t/townska01.html
+Pascal Siakam | https://www.basketball-reference.com/players/s/siakapa01.html
+DeMar DeRozan | https://www.basketball-reference.com/players/d/derozde01.html
+Draymond Green | https://www.basketball-reference.com/players/g/greendr01.html
+Russell Westbrook | https://www.basketball-reference.com/players/w/westbru01.html
+Chris Paul | https://www.basketball-reference.com/players/p/paulch01.html
+Kyrie Irving | https://www.basketball-reference.com/players/i/irvinky01.html
+Ben Simmons | https://www.basketball-reference.com/players/s/simmobe01.html
+Jaylen Brown | https://www.basketball-reference.com/players/b/brownja02.html
+Julius Randle | https://www.basketball-reference.com/players/r/randlju01.html
+Michael Porter Jr. | https://www.basketball-reference.com/players/p/portemi01.html
+Zach LaVine | https://www.basketball-reference.com/players/l/lavinza01.html
+De’Aaron Fox | https://www.basketball-reference.com/players/f/foxde01.html
+Tyrese Haliburton | https://www.basketball-reference.com/players/h/halibty01.html
+

@@ -91,6 +91,85 @@ def scrape_player_profile(player_url):
         today = datetime.today()
         age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
         profile['age'] = age
+
+    categories = {
+        'Championships': 0,
+        'Finals MVP': 0, 
+        'MVP': 0,
+        'All-NBA': 0,
+        'All-Star': 0,
+        'All-Defense': 0,
+        'DPOY': 0,
+        'ROTY': 0,
+        '6MOTY': 0,
+    }
+
+    bling = soup.find('ul', id='bling')
+    if bling:
+        for li in bling.find_all('li'):
+            a_tag = li.find('a')
+            if a_tag:
+                text = a_tag.get_text(strip=True)
+
+            def extract_award_count(text, award_patterns):
+
+                count_match = re.search(award_patterns['count_pattern'], text, re.IGNORECASE)
+                if count_match:
+                    return int(count_match.group(1))
+
+                year_match = re.search(award_patterns['year_pattern'], text, re.IGNORECASE)
+                if year_match:
+                    return 1
+
+                return 0
+            
+
+            awards = {
+                'Championships': {
+                    'count_pattern': r'(\d+)[x×]\s*NBA Champ',
+                    'year_pattern': r'(\d{4}(?:[-–]\d{2})?)\s*NBA Champ'
+                },
+                'MVP': {
+                    'count_pattern': r'(\d+)[x×]\s*MVP',
+                    'year_pattern': r'(\d{4}(?:[-–]\d{2})?)\s*MVP'
+                },
+                'Finals MVP': {
+                    'count_pattern': r'(\d+)[x×]\s*Finals MVP',
+                    'year_pattern': r'(\d{4}(?:[-–]\d{2})?)\s*Finals MVP'
+                },
+                'All-NBA': {
+                    'count_pattern': r'(\d+)[x×]\s*All-NBA',
+                    'year_pattern': r'(\d{4}(?:[-–]\d{2})?)\s*All-NBA'
+                },
+                'All-Star': {
+                    'count_pattern': r'(\d+)[x×]\s*All Star',
+                    'year_pattern': r'(\d{4}(?:[-–]\d{2})?)\s*All Star'
+                },
+                'All-Defense': {
+                    'count_pattern': r'(\d+)[x×]\s*All-Defensive',
+                    'year_pattern': r'(\d{4}(?:[-–]\d{2})?)\s*All-Defensive'
+                },
+                'DPOY': {
+                    'count_pattern': r'(\d+)[x×]\s*Def\.? POY',
+                    'year_pattern': r'(\d{4}(?:[-–]\d{2})?)\s*Def\.? POY'
+                },
+                'ROY': {
+                    'count_pattern': r'(\d+)[x×]\s*ROY',
+                    'year_pattern': r'(\d{4}(?:[-–]\d{2})?)\s*ROY'
+                },
+                '6MOTY': {
+                    'count_pattern': r'(\d+)[x×]\s*6MOY',
+                    'year_pattern': r'(\d{4}(?:[-–]\d{2})?)\s*6MOY'
+                },
+            }
+            
+            for award, patterns in awards.items():
+                count = extract_award_count(text, patterns)
+                if count > 0:
+                    categories[award] = count
+            
+
+    profile.update(categories)
     return profile
 
 @st.cache_data(show_spinner=True)
@@ -153,10 +232,10 @@ nba_teams = {
 }
 
 all_teams = []
-for conf in nba_teams:
-    for div in nba_teams[conf]:
-        all_teams.extend(nba_teams[conf][div])
-team_select_options = ["All Players"] + sorted(all_teams)
+#for conf in nba_teams:
+#    for div in nba_teams[conf]:
+#        all_teams.extend(nba_teams[conf][div]) 
+team_select_options = ["All Players"] #+ sorted(all_teams)
 
 selected_team = st.sidebar.selectbox(
     "Select Team:",
@@ -167,14 +246,16 @@ selected_team = st.sidebar.selectbox(
 
 if selected_team == "All Players":
     filtered_full_names = all_full_names
-else:
-    team_name = selected_team
-    filtered_full_names = []
-    for name in all_full_names:
-        url = all_urls[name]
-        profile = scrape_player_profile(url)
-        if profile.get("current_team", "").lower() == team_name.lower():
-            filtered_full_names.append(name)
+
+#else:
+#    team_name = selected_team 
+#    filtered_full_names = []
+#    for name in all_full_names:
+#        url = all_urls[name]
+#       profile = scrape_player_profile(url) TODO: Fix this so you dont scrape all players for teams each time
+#        if profile.get("current_team", "").lower() == team_name.lower():
+#           filtered_full_names.append(name)
+#
 
 selected_full_name = st.sidebar.selectbox(
     'Select a player',
@@ -259,46 +340,38 @@ if profile:
 
     with tab2:
         st.subheader("Accolades Summary")
-        categories = {
-            'Championships': 0,
-            'MVP': 0,
-            'All-NBA': 0,
-            'All-Star': 0,
-            'All-Defense': 0,
-            'DPOY': 0,
-            'ROTY': 0,
-            '6MOTY': 0,
-        }
-        if 'Awards' in player_data.columns:
-            accolades = player_data['Accolades'].dropna()
-            for accolade in accolades:
-                text = str(accolade)
-                categories['Championships'] = 0
-                categories['MVP'] += len(re.findall(r'\bMVP-1\b', text))
-                categories['All-NBA'] += len(re.findall(r'\bNBA1\b', text))
-                categories['All-NBA'] += len(re.findall(r'\bNBA2\b', text))
-                categories['All-NBA'] += len(re.findall(r'\bNBA3\b', text))
-                categories['All-Star'] += len(re.findall(r'\bAS\b', text))
-                categories['All-Defense'] += len(re.findall(r'\bDEF1\b', text))
-                categories['All-Defense'] += len(re.findall(r'\bDEF2\b', text))
-                categories['DPOY'] += len(re.findall(r'\bDPOY-1\b', text))
-                categories['ROTY'] += len(re.findall(r'\bROTY-1\b', text))
-                categories['6MOTY'] += len(re.findall(r'\b6MOY-1\b', text))
+        accolade_keys = ['Championships', 'MVP', 'All-NBA', 'All-Star', 'All-Defense', 'DPOY', 'ROY', '6MOTY']
+        accolade_finals_mvp = profile.get('Finals MVP', 0)
+        categories = {k: profile.get(k, 0) for k in accolade_keys}
+        if categories:
             grid_html = "<div class='acc-grid'>"
             for k, v in categories.items():
                 if k == 'Championships':
                     if v > 0:
-                        grid_html += f"<div class='champ-item acc-focus champ-glow'><div style='color:#FFD700'>{v}</div><div class='champ-label' style='color:#FFD700'>{k}</div></div>"
+                        grid_html += (f"<div class='champ-item acc-focus champ-glow'>"
+                                    f"<div style='color:#FFD700'>{v}</div>"
+                                    f"<div class='champ-label' style='color:#FFD700'>{k}</div>"
+                                    "</div>")
                     else:
-                        grid_html += f"<div class='champ-item'><div style='color:#EEEEEE'>{v}</div><div class='champ-label' style='color:#EEEEEE'>{k}</div></div>"
+                        grid_html += (f"<div class='champ-item'>"
+                                    f"<div style='color:#EEEEEE'>{v}</div>"
+                                    f"<div class='champ-label' style='color:#EEEEEE'>{k}</div>"
+                                    "</div>")
                 else:
                     if v > 0:
-                        grid_html += f"<div class='acc-item acc-focus acc-glow'><div style='color:#FF4500'>{v}</div><div class='acc-label' style='color:#FF4500'>{k}</div></div>"
+                        grid_html += (f"<div class='acc-item acc-focus acc-glow'>"
+                                    f"<div style='color:#FF4500'>{v}</div>"
+                                    f"<div class='acc-label' style='color:#FF4500'>{k}</div>"
+                                    "</div>")
                     else:
-                        grid_html += f"<div class='acc-item'><div style='color:#EEEEEE'>{v}</div><div class='acc-label' style='color:#EEEEEE'>{k}</div></div>"
+                        grid_html += (f"<div class='acc-item'>"
+                                    f"<div style='color:#EEEEEE'>{v}</div>"
+                                    f"<div class='acc-label' style='color:#EEEEEE'>{k}</div>"
+                                    "</div>")
             grid_html += "</div>"
             st.markdown(grid_html, unsafe_allow_html=True)
         else:
             st.write("No accolades found.")
+
 st.sidebar.markdown("---")
 st.sidebar.markdown("Built with 🏀 Streamlit and Plotly")
