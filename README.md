@@ -15,7 +15,7 @@ This project is designed to visualize career progressions of NBA players via Plo
 
 - Requests & BeautifulSoup — Web scraping and data collection
 
-## Launch Dashboard
+## Launch the Dashboard
 You can use the web-app directly at the link below, no setup required:
 
 [Launch the Basketball Player Stats Dashboard](https://basketball-player-dashboard.streamlit.app)
