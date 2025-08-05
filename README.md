@@ -22,7 +22,7 @@ You can either run the included **start.sh** shell script to set up and launch t
 or follow the manual steps below to create a virtual environment, install dependencies, and run the dashboard.
 
 ### Manual Setup
-1. **Create a virtual environment** (optional but recommended to keep dependencies isolated):
+1. Create a virtual environment (optional but recommended to keep dependencies isolated):
 
 On Windows (using Command Prompt or PowerShell):
    ```
