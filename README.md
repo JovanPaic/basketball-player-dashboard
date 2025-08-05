@@ -18,18 +18,34 @@ The application leverages the following core technologies:
 
 ## Usage Instructions
 
-To set up and run the application, first install the required dependencies:
+You can either run the included **start.sh** shell script to set up and launch the app automatically,  
+or follow the manual steps below to create a virtual environment, install dependencies, and run the dashboard.
 
+### Manual Setup
+1. **Create a virtual environment** (optional but recommended to keep dependencies isolated):
+
+On Windows (using Command Prompt or PowerShell):
+   ```
+   python -m venv venv
+   venv\Scripts\activate
+   ```
+On macOS/Linux:
+  ```
+  python3 -m venv venv
+  source venv/bin/activate
+  ```
+  
+2. Install the required dependencies inside the activated virtual environment:
 ```
-pip install streamlit pandas plotly requests beautifulsoup4
+pip install -r ./requirements.txt
 ```
 
-Then, launch the dashboard with the following command:
+3. Launch the dashboard:
 ```
 streamlit run app.py
 ```
 
-or simply double click on the **start.sh** file
+Alternatively, you can run the start.sh script that automates this process.
 
 ---
 
