@@ -18,7 +18,7 @@ Install dependencies:
 
 ```
 bash
-pip install streamlit pandas plotly
+pip install streamlit pandas plotly requests BeautifulSoup re
 ```
 Run the app:
 ```
