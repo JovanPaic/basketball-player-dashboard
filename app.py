@@ -1,35 +1,47 @@
-from flask import Flask, jsonify, request, render_template
-from flask_cors import CORS
+import streamlit as st
 import pandas as pd
+import plotly.graph_objs as go
 
-app = Flask(__name__)
-CORS(app)
+# Load the CSV data once at app start
+@st.cache_data
+def load_data():
+    data = pd.read_csv('data/players_stats.csv')
+    return data
 
-# Load player stats CSV into DataFrame
-data = pd.read_csv('data/players_stats.csv')
+data = load_data()
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+# Sidebar dropdown for player selection
+player_list = sorted(data['Player'].dropna().unique())
+selected_player = st.sidebar.selectbox('Select a player', player_list)
 
-@app.route('/api/players')
-def get_players():
-    players = data['Player'].dropna().unique()
-    players.sort()
-    return jsonify(players.tolist())
+# Filter data for the selected player
+player_data = data[(data['Player'] == selected_player) & (pd.to_numeric(data['PTS'], errors='coerce').notnull())]
 
-@app.route('/api/player_stats')
-def get_player_stats():
-    name = request.args.get('name')
-    if not name:
-        return jsonify([])
+if player_data.empty:
+    st.write("No data available for this player.")
+else:
+    # Sort by Season
+    player_data = player_data.sort_values(by='Season')
 
-    # Filter data for player, drop rows with missing or invalid PTS
-    player_data = data[(data['Player'] == name) & (pd.to_numeric(data['PTS'], errors='coerce').notnull())]
+    seasons = player_data['Season'].tolist()
+    pts = player_data['PTS'].astype(float).tolist()
 
-    # Select columns and convert DataFrame to dict list
-    result = player_data[['Season', 'PTS']].sort_values(by='Season').to_dict(orient='records')
-    return jsonify(result)
+    # Create Plotly line chart
+    trace = go.Scatter(
+        x=seasons,
+        y=pts,
+        mode='lines+markers',
+        name='Points Per Game'
+    )
 
-if __name__ == '__main__':
-    app.run(debug=True)
+    layout = go.Layout(
+        title=f'Points Per Game for {selected_player}',
+        xaxis=dict(title='Season', type='category'),  # Ensure categorical axis for seasons
+        yaxis=dict(title='Points Per Game', rangemode='tozero'),
+        margin=dict(t=40, b=50)
+    )
+
+    fig = go.Figure(data=[trace], layout=layout)
+
+    # Display the plotly chart
+    st.plotly_chart(fig, use_container_width=True)

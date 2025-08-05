@@ -1,23 +1,31 @@
 # Basketball Player Stats Dashboard
-
-A straightforward web application built with Python and JavaScript for tracking and comparing NBA player performance.
-The dashboard manages and displays player stats using interactive charts and a responsive interface.
+A simple and interactive web application built entirely with Python and Streamlit to explore NBA player performance across multiple seasons.
 
 ## Overview
-
-This project allows you to view, search, and compare NBA player statistics across multiple seasons through a user-friendly web dashboard.
+View and compare NBA player statistics through a clean, user-friendly dashboard powered by Python. Select players from a dropdown menu to dynamically visualize their points per game by season with interactive Plotly charts.
 
 ## Technologies Used
-- Python with Flask — backend API serving player and stat data  
-- Pandas — for data loading and processing from CSV files  
-- JavaScript (ES6) — handles frontend interaction and dynamic updates  
-- Plotly.js — provides responsive, interactive data visualizations  
-- HTML/CSS with Bootstrap — for a clean and responsive UI design
+Python — the core programming language for the app
 
+- Streamlit — for building the interactive web interface and UI components
 
- ## Downloads
-  --Comming Soon--
+- Pandas — for data loading and processing from CSV files
 
-  ---
+- Plotly — for creating responsive, interactive charts
 
-  This project is open source and free to use. Feel free to suggest improvements or customize it to fit your needs!
+## How to Use
+Install dependencies:
+
+```
+bash
+pip install streamlit pandas plotly
+Run the app:
+```
+```
+bash
+streamlit run app.py
+```
+
+Select a player from the sidebar to 
+see their seasonal points per game.
+This project is open source and free to use. Contributions, suggestions, and customizations are welcome!
