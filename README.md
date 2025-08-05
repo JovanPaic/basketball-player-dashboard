@@ -45,8 +45,6 @@ pip install -r ./requirements.txt
 streamlit run app.py
 ```
 
-Alternatively, you can run the start.sh script that automates this process.
-
 ---
 
 This project is open-source and welcomes contributions, suggestions, and customizations from the community.
