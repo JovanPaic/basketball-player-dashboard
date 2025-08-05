@@ -19,8 +19,8 @@ Install dependencies:
 ```
 bash
 pip install streamlit pandas plotly
-Run the app:
 ```
+Run the app:
 ```
 bash
 streamlit run app.py
@@ -28,4 +28,7 @@ streamlit run app.py
 
 Select a player from the sidebar to 
 see their seasonal points per game.
+
+---
+
 This project is open source and free to use. Contributions, suggestions, and customizations are welcome!
