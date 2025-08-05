@@ -1,50 +1,25 @@
 # Basketball Player Stats Dashboard
-
-This project is an interactive web application built with Python and Streamlit, designed for exploring NBA player performance across multiple seasons. It provides a dynamic and intuitive interface to visualize player statistics and gain insights into career trajectories.
+Explore NBA player performance across seasons through an interactive web interface.
 
 ## Overview
-
-The dashboard enables users to browse and compare NBA players through a clean, responsive interface. By selecting a player from the sidebar, users can view detailed season-by-season statistics, such as points per game, displayed through interactive Plotly charts. The application offers a seamless experience for analyzing player progress and performance trends over time.
+This project is designed to visualize career progressions of NBA players via Plotly charts in a Streamlit dashboard. Select a player from the sidebar to view season-by-season stats like points per game and other performance metrics.
 
 ## Technologies Employed
+- Python — Data processing & application logic
 
-The application leverages the following core technologies:
+- Streamlit — Interactive and user-friendly web interface
 
-- **Python** for data processing and application logic.
-- **Streamlit** to create an interactive and user-friendly web interface.
-- **Pandas** for efficient data manipulation and preparation.
-- **Plotly** to deliver rich, responsive, and interactive visualizations.
-- **Requests** and **BeautifulSoup** for web scraping and data extraction from reliable sources.
+- Pandas — Efficient data manipulation
 
-## Usage Instructions
+- Plotly — Rich, responsive visualizations
 
-You can either run the included **start.sh** shell script to set up and launch the app automatically,  
-or follow the manual steps below to create a virtual environment, install dependencies, and run the dashboard.
+- Requests & BeautifulSoup — Web scraping and data collection
 
-### Manual Setup
-1. Create a virtual environment (optional but recommended to keep dependencies isolated):
+## Launch Dashboard
+You can use the web-app directly at the link below — no setup required:
 
-On Windows (using Command Prompt or PowerShell):
-   ```
-   python -m venv venv
-   venv\Scripts\activate
-   ```
-On macOS/Linux:
-  ```
-  python3 -m venv venv
-  source venv/bin/activate
-  ```
-  
-2. Install the required dependencies inside the activated virtual environment:
-```
-pip install -r ./requirements.txt
-```
-
-3. Launch the dashboard:
-```
-streamlit run app.py
-```
+[Launch the Basketball Player Stats Dashboard](https://basketball-player-dashboard.streamlit.app)
 
 ---
 
-This project is open-source and welcomes contributions, suggestions, and customizations from the community.
+This project is open-source and welcomes your feedback and suggestions.
