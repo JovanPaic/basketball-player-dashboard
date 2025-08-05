@@ -2,8 +2,8 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objs as go
 import requests
-from bs4 import BeautifulSoup
 import re
+from bs4 import BeautifulSoup
 from datetime import datetime
 
 @st.cache_data
