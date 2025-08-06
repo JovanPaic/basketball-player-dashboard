@@ -69,7 +69,12 @@ def scrape_player_profile(player_url):
             profile['position'] = line.strip()
             break
 
-    team_tag = meta_div.find('a', href=lambda x: x and '/teams/' in x)
+    #team_tag = meta_div.find('a', href=lambda x: x and '/teams/' in x)
+    team_tag = None
+    for strong in meta_div.find_all('strong'):
+        if 'Team' in strong.get_text():
+            team_tag = strong.find_next('a')
+            break
     profile['current_team'] = team_tag.get_text(strip=True) if team_tag else 'Retired or Free Agent'
 
     profile['age'] = None
