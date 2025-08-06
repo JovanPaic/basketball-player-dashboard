@@ -3,12 +3,11 @@ import pandas as pd
 import plotly.graph_objs as go
 import requests
 import re
-import time
 from bs4 import BeautifulSoup, Comment
 from datetime import datetime
 
 
-@st.cache_data
+@st.cache_data()
 def load_players_from_file(file_path="data/players.txt"):
     players = []
     with open(file_path, "r", encoding="utf-8") as f:
@@ -25,7 +24,7 @@ def load_players_from_file(file_path="data/players.txt"):
     return players
 
 
-@st.cache_data(show_spinner=True)
+@st.cache_data()
 def scrape_player_profile(player_url):
     response = requests.get(player_url)
     response.encoding = 'utf-8'
@@ -69,7 +68,6 @@ def scrape_player_profile(player_url):
             profile['position'] = line.strip()
             break
 
-    #team_tag = meta_div.find('a', href=lambda x: x and '/teams/' in x)
     team_tag = None
     for strong in meta_div.find_all('strong'):
         if 'Team' in strong.get_text():
@@ -187,7 +185,7 @@ def scrape_player_profile(player_url):
     return profile
 
 
-@st.cache_data(show_spinner=True)
+@st.cache_data()
 def scrape_season_stats(player_url):
     from io import StringIO
     resp = requests.get(player_url)
@@ -208,17 +206,35 @@ def scrape_season_stats(player_url):
             return df
     return pd.DataFrame()
 
-
-players = load_players_from_file("data/players.txt")
-all_full_names = [p[0] for p in players]
-all_urls = {p[0]: p[1] for p in players}
-
 st.set_page_config(page_title="NBA Player Stats Dashboard", page_icon="🏀", layout="wide")
 
+st.sidebar.title("Player Selection")
+
+# Optional: load your own styles
 with open("assets/styles/style.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-st.sidebar.title("Player Selection")
+player_category = st.sidebar.radio(
+    "Select Player Category:",
+    options=["Active Players", "Active + Historic Players"],
+    index=0,
+    help="Choose whether to view active or all players."
+)
+
+selected_team = st.sidebar.selectbox(
+    "Select Team:",
+    ["All Players"],
+    index=0,
+    help="Choose a team to filter available players."
+)
+
+file_path = "data/active_players.txt" if player_category == "Active Players" else "data/all_players.txt"
+
+
+players = load_players_from_file(file_path)
+all_full_names = [p[0] for p in players]
+all_urls = {p[0]: p[1] for p in players}
+
 
 nba_teams = {
     "Eastern Conference": {
@@ -245,16 +261,6 @@ nba_teams = {
     }
 }
 
-all_teams = []
-# For now just "All Players"
-team_select_options = ["All Players"]
-
-selected_team = st.sidebar.selectbox(
-    "Select Team:",
-    team_select_options,
-    index=0,
-    help="Choose a team to filter available players."
-)
 
 if selected_team == "All Players":
     filtered_full_names = all_full_names
