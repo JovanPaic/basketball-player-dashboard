@@ -24,7 +24,7 @@
 }
 .champ-item {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 900;
     padding: 20px 0;
     border-radius: 12px;
@@ -38,7 +38,7 @@
     box-shadow: 0 0 20px 4px #FFD70099, 0 2px 12px #0003;
 }
 .champ-label {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
     margin-top: 10px;
 }
@@ -46,4 +46,9 @@
     font-size: 1rem;
     font-weight: 400;
     margin-top: 8px;
+}
+.year-item {
+    font-size: 0.4em;
+    color: #AAAAAA;
+    margin-top: -5px;
 }

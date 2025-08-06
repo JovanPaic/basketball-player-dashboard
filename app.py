@@ -4,6 +4,7 @@ import plotly.graph_objs as go
 import requests
 import re
 from bs4 import BeautifulSoup
+from bs4 import Comment
 from datetime import datetime
 
 @st.cache_data
@@ -93,82 +94,91 @@ def scrape_player_profile(player_url):
         profile['age'] = age
 
     categories = {
-        'Championships': 0,
-        'Finals MVP': 0, 
-        'MVP': 0,
-        'All-NBA': 0,
-        'All-Star': 0,
-        'All-Defense': 0,
-        'DPOY': 0,
-        'ROTY': 0,
-        '6MOTY': 0,
+        'Championships': {'count': 0, 'years': []},
+        'Finals MVP': {'count': 0, 'years': []},
+        'MVP': {'count': 0, 'years': []},
+        'All-NBA': {'count': 0, 'years': []},
+        'All-Star': {'count': 0, 'years': []},
+        'All-Defensive': {'count': 0, 'years': []},
+        'DPOY': {'count': 0, 'years': []},
+        'ROY': {'count': 0, 'years': []},
+        '6MOTY': {'count': 0, 'years': []},
     }
 
-    bling = soup.find('ul', id='bling')
-    if bling:
-        for li in bling.find_all('li'):
-            a_tag = li.find('a')
-            if a_tag:
-                text = a_tag.get_text(strip=True)
+    leaderboard_id_to_category = {
+    'leaderboard_championships': 'Championships',
+    'leaderboard_allstar': 'All-Star',
+    }
 
-            def extract_award_count(text, award_patterns):
+    comments = soup.find_all(string=lambda text: isinstance(text, Comment))
 
-                count_match = re.search(award_patterns['count_pattern'], text, re.IGNORECASE)
-                if count_match:
-                    return int(count_match.group(1))
+    div_leaderboard = None
+    for comment in comments:
+        if 'div_leaderboard' in comment:
+            commented_soup = BeautifulSoup(comment, 'html.parser')
+            div_leaderboard = commented_soup.find('div', id='div_leaderboard')
+            break
 
-                year_match = re.search(award_patterns['year_pattern'], text, re.IGNORECASE)
-                if year_match:
-                    return 1
+    if div_leaderboard:
+        for div_id, category_key in leaderboard_id_to_category.items():
+            category_div = div_leaderboard.find('div', id=div_id)
+            if category_div:
+                rows = category_div.find_all('tr')
+                for row in rows:
+                    year_td = row.find('td')
+                    if year_td:
+                        year_link = year_td.find('a')
+                        if year_link:
+                            year = year_link.get_text(strip=True).split()[0]
+                            categories[category_key]['years'].append(year)
+                categories[category_key]['count'] = len(categories[category_key]['years'])
 
-                return 0
-            
+    notable_div = div_leaderboard.find('div', id='leaderboard_notable-awards')
+    if notable_div:
+        notable_table = notable_div.find('table')
+        if notable_table:
+            for row in notable_table.find_all('tr'):
+                year_td = row.find('td')
+                if year_td:
+                    year_link = year_td.find('a')
+                    if year_link:
+                        year = year_link.get_text(strip=True).split()[0]
+                        award_lower = year_link.get_text().lower()
+                        if 'bill russell' in award_lower:
+                            categories['Finals MVP']['count'] += 1
+                            categories['Finals MVP']['years'].append(year)
+                        elif 'michael jordan' in award_lower:
+                            categories['MVP']['count'] += 1
+                            categories['MVP']['years'].append(year)
+                        elif 'wilt chamberlain' in award_lower:
+                            categories['ROY']['count'] += 1
+                            categories['ROY']['years'].append(year)
+                        elif 'hakeem olajuwon' in award_lower:
+                            categories['DPOY']['count'] += 1
+                            categories['DPOY']['years'].append(year)
+                        elif 'john havlicek' in award_lower:
+                            categories['6MOTY']['count'] += 1
+                            categories['6MOTY']['years'].append(year)
+                            
 
-            awards = {
-                'Championships': {
-                    'count_pattern': r'(\d+)[x×]\s*NBA Champ',
-                    'year_pattern': r'(\d{4}(?:[-–]\d{2})?)\s*NBA Champ'
-                },
-                'MVP': {
-                    'count_pattern': r'(\d+)[x×]\s*MVP',
-                    'year_pattern': r'(\d{4}(?:[-–]\d{2})?)\s*MVP'
-                },
-                'Finals MVP': {
-                    'count_pattern': r'(\d+)[x×]\s*Finals MVP',
-                    'year_pattern': r'(\d{4}(?:[-–]\d{2})?)\s*Finals MVP'
-                },
-                'All-NBA': {
-                    'count_pattern': r'(\d+)[x×]\s*All-NBA',
-                    'year_pattern': r'(\d{4}(?:[-–]\d{2})?)\s*All-NBA'
-                },
-                'All-Star': {
-                    'count_pattern': r'(\d+)[x×]\s*All Star',
-                    'year_pattern': r'(\d{4}(?:[-–]\d{2})?)\s*All Star'
-                },
-                'All-Defense': {
-                    'count_pattern': r'(\d+)[x×]\s*All-Defensive',
-                    'year_pattern': r'(\d{4}(?:[-–]\d{2})?)\s*All-Defensive'
-                },
-                'DPOY': {
-                    'count_pattern': r'(\d+)[x×]\s*Def\.? POY',
-                    'year_pattern': r'(\d{4}(?:[-–]\d{2})?)\s*Def\.? POY'
-                },
-                'ROY': {
-                    'count_pattern': r'(\d+)[x×]\s*ROY',
-                    'year_pattern': r'(\d{4}(?:[-–]\d{2})?)\s*ROY'
-                },
-                '6MOTY': {
-                    'count_pattern': r'(\d+)[x×]\s*6MOY',
-                    'year_pattern': r'(\d{4}(?:[-–]\d{2})?)\s*6MOY'
-                },
-            }
-            
-            for award, patterns in awards.items():
-                count = extract_award_count(text, patterns)
-                if count > 0:
-                    categories[award] = count
-            
-
+    all_league_div = div_leaderboard.find('div', id='leaderboard_all_league')
+    if all_league_div:
+        all_league_table = all_league_div.find('table')
+        if all_league_table:
+            for row in all_league_table.find_all('tr'):
+                year_td = row.find('td')
+                if year_td:
+                    year_link = year_td.find('a')
+                    if year_link:
+                        year = year_link.get_text(strip=True).split()[0]
+                        award_lower = year_td.get_text().lower()
+                        if 'all-nba' in award_lower:
+                            categories['All-NBA']['count'] += 1
+                            categories['All-NBA']['years'].append(year)
+                        elif 'all-defensive ' in award_lower:
+                            categories['All-Defensive']['count'] += 1
+                            categories['All-Defensive']['years'].append(year)
+         
     profile.update(categories)
     return profile
 
@@ -340,39 +350,62 @@ if profile:
 
     with tab2:
         st.subheader("Accolades Summary")
-        accolade_keys = ['Championships', 'MVP', 'All-NBA', 'All-Star', 'All-Defense', 'DPOY', 'ROY', '6MOTY']
-        accolade_finals_mvp = profile.get('Finals MVP', 0)
-        categories = {k: profile.get(k, 0) for k in accolade_keys}
-        if categories:
+
+        accolade_keys = ['Championships', 'MVP', 'All-NBA', 'All-Star', 'All-Defensive', 'DPOY', 'ROY', '6MOTY']
+        categories_display = {k: profile.get(k, {'count': 0, 'years': []}) for k in accolade_keys}
+        finals_mvp = profile.get('Finals MVP', {'count': 0, 'years': []})
+
+        if categories_display:
             grid_html = "<div class='acc-grid'>"
-            for k, v in categories.items():
+            for k, data in categories_display.items():
+                count = data['count']
+                years = data['years']
+                years_str = ", ".join(years)
+                years_html = ""
+                if years_str:
+                    years_html = f"<div class='year-item'>( {years_str} )</div>"
+
                 if k == 'Championships':
-                    if v > 0:
+                    if count > 0:
                         grid_html += (f"<div class='champ-item acc-focus champ-glow'>"
-                                    f"<div style='color:#FFD700'>{v}</div>"
-                                    f"<div class='champ-label' style='color:#FFD700'>{k}</div>"
+                                    f"<div class='champ-label' style='color:#FFD700;'>{k}</div>"
+                                    f"<div style='color:#FFD700;'>{count}</div>"
+                                    f"{years_html}"
                                     "</div>")
                     else:
                         grid_html += (f"<div class='champ-item'>"
-                                    f"<div style='color:#EEEEEE'>{v}</div>"
-                                    f"<div class='champ-label' style='color:#EEEEEE'>{k}</div>"
+                                    f"<div class='champ-label' style='color:#EEEEEE;'>{k}</div>"
+                                    f"<div style='color:#EEEEEE;'>{count}</div>"
+                                    f"{years_html}"
                                     "</div>")
                 else:
-                    if v > 0:
+                    if count > 0:
                         grid_html += (f"<div class='acc-item acc-focus acc-glow'>"
-                                    f"<div style='color:#FF4500'>{v}</div>"
-                                    f"<div class='acc-label' style='color:#FF4500'>{k}</div>"
+                                    f"<div class='acc-label' style='color:#FF4500;'>{k}</div>"
+                                    f"<div style='color:#FF4500;;'>{count}</div>"
+                                    f"{years_html}"
                                     "</div>")
                     else:
                         grid_html += (f"<div class='acc-item'>"
-                                    f"<div style='color:#EEEEEE'>{v}</div>"
-                                    f"<div class='acc-label' style='color:#EEEEEE'>{k}</div>"
+                                    f"<div class='acc-label' style='color:#EEEEEE;'>{k}</div>"
+                                    f"<div style='color:#EEEEEE;'>{count}</div>"
+                                    f"{years_html}"
                                     "</div>")
             grid_html += "</div>"
+
             st.markdown(grid_html, unsafe_allow_html=True)
         else:
             st.write("No accolades found.")
 
 st.sidebar.markdown("---")
+
+st.sidebar.markdown("Using data from :")
+st.sidebar.page_link( "https://www.basketball-reference.com/",label="Basketball Reference", icon="🏀")
+
+st.sidebar.markdown("---")
+
+st.sidebar.markdown("Built with Streamlit and Plotly")
 st.sidebar.markdown("Made by Jovan Paić")
-st.sidebar.markdown("Built with 🏀 Streamlit and Plotly")
+
+
+
