@@ -325,13 +325,19 @@ if profile:
             valid_rows = player_data[selected_stat].apply(lambda x: pd.notnull(x) and str(x).replace('.', '', 1).isdigit())
             filtered_data = player_data[valid_rows]
             filtered_data = filtered_data.drop_duplicates(subset=['Season'], keep='first')
-            seasons = filtered_data['Season'].tolist()
             stat_values = pd.to_numeric(filtered_data[selected_stat], errors='coerce').fillna(0).tolist()
-            if not seasons or not any(stat_values):
-                st.warning(f"No valid {selected_stat} data to plot.")
+            if not any(stat_values):
+               st.warning(f"No valid {selected_stat} data to plot.")
+
+            combined_x_labels = []
+            for _, row in filtered_data.iterrows():
+                season_label = str(row['Season'])
+                team_label = str(row['Team'])
+                combined_x_labels.append(f"{season_label}\n\n{team_label}")
+
             else:
                 trace = go.Scatter(
-                    x=seasons,
+                    x=combined_x_labels,
                     y=stat_values,
                     mode='lines+markers',
                     name=selected_stat,
