@@ -3,9 +3,10 @@ import pandas as pd
 import plotly.graph_objs as go
 import requests
 import re
-from bs4 import BeautifulSoup
-from bs4 import Comment
+import time
+from bs4 import BeautifulSoup, Comment
 from datetime import datetime
+
 
 @st.cache_data
 def load_players_from_file(file_path="data/players.txt"):
@@ -23,10 +24,11 @@ def load_players_from_file(file_path="data/players.txt"):
             players.append((full_name, url))
     return players
 
+
 @st.cache_data(show_spinner=True)
 def scrape_player_profile(player_url):
     response = requests.get(player_url)
-    response.encoding = 'utf-8' 
+    response.encoding = 'utf-8'
     soup = BeautifulSoup(response.text, 'lxml')
     profile = {}
 
@@ -70,7 +72,6 @@ def scrape_player_profile(player_url):
     team_tag = meta_div.find('a', href=lambda x: x and '/teams/' in x)
     profile['current_team'] = team_tag.get_text(strip=True) if team_tag else 'Retired or Free Agent'
 
-
     profile['age'] = None
     birth_date = None
     month = day = year = None
@@ -86,7 +87,6 @@ def scrape_player_profile(player_url):
                     break
         if month and day and year:
             birth_date = datetime.strptime(f"{month} {day} {year}", "%B %d %Y")
-
             break
     if birth_date:
         today = datetime.today()
@@ -106,8 +106,8 @@ def scrape_player_profile(player_url):
     }
 
     leaderboard_id_to_category = {
-    'leaderboard_championships': 'Championships',
-    'leaderboard_allstar': 'All-Star',
+        'leaderboard_championships': 'Championships',
+        'leaderboard_allstar': 'All-Star',
     }
 
     comments = soup.find_all(string=lambda text: isinstance(text, Comment))
@@ -133,54 +133,54 @@ def scrape_player_profile(player_url):
                             categories[category_key]['years'].append(year)
                 categories[category_key]['count'] = len(categories[category_key]['years'])
 
-    notable_div = div_leaderboard.find('div', id='leaderboard_notable-awards')
-    if notable_div:
-        notable_table = notable_div.find('table')
-        if notable_table:
-            for row in notable_table.find_all('tr'):
-                year_td = row.find('td')
-                if year_td:
-                    year_link = year_td.find('a')
-                    if year_link:
-                        year = year_link.get_text(strip=True).split()[0]
-                        award_lower = year_link.get_text().lower()
-                        if 'bill russell' in award_lower:
-                            categories['Finals MVP']['count'] += 1
-                            categories['Finals MVP']['years'].append(year)
-                        elif 'michael jordan' in award_lower:
-                            categories['MVP']['count'] += 1
-                            categories['MVP']['years'].append(year)
-                        elif 'wilt chamberlain' in award_lower:
-                            categories['ROY']['count'] += 1
-                            categories['ROY']['years'].append(year)
-                        elif 'hakeem olajuwon' in award_lower:
-                            categories['DPOY']['count'] += 1
-                            categories['DPOY']['years'].append(year)
-                        elif 'john havlicek' in award_lower:
-                            categories['6MOTY']['count'] += 1
-                            categories['6MOTY']['years'].append(year)
-                            
+        notable_div = div_leaderboard.find('div', id='leaderboard_notable-awards')
+        if notable_div:
+            notable_table = notable_div.find('table')
+            if notable_table:
+                for row in notable_table.find_all('tr'):
+                    year_td = row.find('td')
+                    if year_td:
+                        year_link = year_td.find('a')
+                        if year_link:
+                            year = year_link.get_text(strip=True).split()[0]
+                            award_lower = year_link.get_text().lower()
+                            if 'bill russell' in award_lower:
+                                categories['Finals MVP']['count'] += 1
+                                categories['Finals MVP']['years'].append(year)
+                            elif 'michael jordan' in award_lower:
+                                categories['MVP']['count'] += 1
+                                categories['MVP']['years'].append(year)
+                            elif 'wilt chamberlain' in award_lower:
+                                categories['ROY']['count'] += 1
+                                categories['ROY']['years'].append(year)
+                            elif 'hakeem olajuwon' in award_lower:
+                                categories['DPOY']['count'] += 1
+                                categories['DPOY']['years'].append(year)
+                            elif 'john havlicek' in award_lower:
+                                categories['6MOTY']['count'] += 1
+                                categories['6MOTY']['years'].append(year)
 
-    all_league_div = div_leaderboard.find('div', id='leaderboard_all_league')
-    if all_league_div:
-        all_league_table = all_league_div.find('table')
-        if all_league_table:
-            for row in all_league_table.find_all('tr'):
-                year_td = row.find('td')
-                if year_td:
-                    year_link = year_td.find('a')
-                    if year_link:
-                        year = year_link.get_text(strip=True).split()[0]
-                        award_lower = year_td.get_text().lower()
-                        if 'all-nba' in award_lower:
-                            categories['All-NBA']['count'] += 1
-                            categories['All-NBA']['years'].append(year)
-                        elif 'all-defensive ' in award_lower:
-                            categories['All-Defensive']['count'] += 1
-                            categories['All-Defensive']['years'].append(year)
-         
+        all_league_div = div_leaderboard.find('div', id='leaderboard_all_league')
+        if all_league_div:
+            all_league_table = all_league_div.find('table')
+            if all_league_table:
+                for row in all_league_table.find_all('tr'):
+                    year_td = row.find('td')
+                    if year_td:
+                        year_link = year_td.find('a')
+                        if year_link:
+                            year = year_link.get_text(strip=True).split()[0]
+                            award_lower = year_td.get_text().lower()
+                            if 'all-nba' in award_lower:
+                                categories['All-NBA']['count'] += 1
+                                categories['All-NBA']['years'].append(year)
+                            elif 'all-defensive ' in award_lower:
+                                categories['All-Defensive']['count'] += 1
+                                categories['All-Defensive']['years'].append(year)
+
     profile.update(categories)
     return profile
+
 
 @st.cache_data(show_spinner=True)
 def scrape_season_stats(player_url):
@@ -193,21 +193,20 @@ def scrape_season_stats(player_url):
     for table in all_tables:
         if 'Season' in table.columns and 'PTS' in table.columns:
             df = table.dropna(subset=['Season'])
-            df = df[df['Season'] != 'Season']  
+            df = df[df['Season'] != 'Season']
             season_pattern = re.compile(r'^\d{4}-\d{2}$')
             df = df[df['Season'].apply(lambda x: bool(season_pattern.match(str(x))))]
             df.reset_index(drop=True, inplace=True)
-            # Extract accolades from the last column if it exists
             if len(df.columns) > 0:
                 last_col = df.columns[-1]
                 df['Accolades'] = df[last_col].fillna("")
             return df
     return pd.DataFrame()
 
+
 players = load_players_from_file("data/players.txt")
 all_full_names = [p[0] for p in players]
 all_urls = {p[0]: p[1] for p in players}
-
 
 st.set_page_config(page_title="NBA Player Stats Dashboard", page_icon="🏀", layout="wide")
 
@@ -242,10 +241,8 @@ nba_teams = {
 }
 
 all_teams = []
-#for conf in nba_teams:
-#    for div in nba_teams[conf]:
-#        all_teams.extend(nba_teams[conf][div]) 
-team_select_options = ["All Players"] #+ sorted(all_teams)
+# For now just "All Players"
+team_select_options = ["All Players"]
 
 selected_team = st.sidebar.selectbox(
     "Select Team:",
@@ -257,16 +254,6 @@ selected_team = st.sidebar.selectbox(
 if selected_team == "All Players":
     filtered_full_names = all_full_names
 
-#else:
-#    team_name = selected_team 
-#    filtered_full_names = []
-#    for name in all_full_names:
-#        url = all_urls[name]
-#       profile = scrape_player_profile(url) TODO: Fix this so you dont scrape all players for teams each time
-#        if profile.get("current_team", "").lower() == team_name.lower():
-#           filtered_full_names.append(name)
-#
-
 selected_full_name = st.sidebar.selectbox(
     'Select a player',
     filtered_full_names,
@@ -274,146 +261,126 @@ selected_full_name = st.sidebar.selectbox(
 )
 player_url = all_urls[selected_full_name] if filtered_full_names else None
 
+content_placeholder = st.empty()
+tabs_placeholder = st.empty()
+
+stat_options = []
 profile = None
 player_data = pd.DataFrame()
+
 if player_url:
-    profile = scrape_player_profile(player_url)
-    player_data = scrape_season_stats(player_url)
+    with content_placeholder.container():
+        st.markdown("""
+            <div class="loader-container">
+            <div class="loader"></div>
+            <p class="loader-text">⏳ Loading player data, please wait...</p>
+            </div>
+            """, unsafe_allow_html=True)
 
-if not player_data.empty:
+        profile = scrape_player_profile(player_url)
+        player_data = scrape_season_stats(player_url)
+
+    content_placeholder.empty()
+    tabs_placeholder.empty()
+
     stat_options = [col for col in ["PTS", "AST", "TRB", "G", "MP"] if col in player_data.columns]
-else:
-    stat_options = ["PTS"]
-selected_stat = st.sidebar.selectbox(
-    "Stat to chart:",
-    stat_options,
-    index=stat_options.index("PTS") if "PTS" in stat_options else 0,
-    help="Choose which stat to display in the chart."
-)
+    selected_stat = st.sidebar.selectbox(
+        "Stat to chart:",
+        stat_options,
+        index=stat_options.index("PTS") if "PTS" in stat_options else 0,
+         help="Choose which stat to display in the chart."
+    )
 
-if profile:
-    with st.container():
-        cols = st.columns([1,6])
+    with content_placeholder.container():
+        cols = st.columns([1, 6])
         with cols[0]:
-            if profile['photo_url']:
+            if profile.get('photo_url'):
                 st.image(profile['photo_url'], width=150)
         with cols[1]:
-            st.markdown("""
+            st.markdown(f"""
                 <div style='min-height:180px;'>
-                    <h1 style='margin-bottom:0;'>%s</h1>
-                    <div><strong>Age:</strong> %s</div>
-                    <div><strong>Height & Weight:</strong> %s</div>
-                    <div><strong>Current Team:</strong> %s</div>
-                    <div><strong>Position:</strong> %s</div>
+                    <h1 style='margin-bottom:0;'>{profile.get('full_name') or selected_full_name}</h1>
+                    <div><strong>Age:</strong> {profile.get('age', 'N/A')}</div>
+                    <div><strong>Height & Weight:</strong> {profile.get('height', 'N/A')}, {profile.get('weight', 'N/A')} {profile.get('height_weight', 'N/A')}</div>
+                    <div><strong>Current Team:</strong> {profile.get('current_team', 'N/A')}</div>
+                    <div><strong>Position:</strong> {profile.get('position', 'N/A')}</div>
                 </div>
-            """ % (
-                profile.get('full_name') or selected_full_name,
-                profile.get('age', 'N/A'),
-                profile.get('height', 'N/A') + ', ' +  profile.get('weight', 'N/A') + '  ' +  profile.get('height_weight', 'N/A'),
-                profile.get('current_team', 'N/A'),
-                profile.get('position', 'N/A')
-            ), unsafe_allow_html=True)
-    tab1, tab2 = st.tabs(["Stats Chart", "Career Accolades"])
+            """, unsafe_allow_html=True)
 
-    with tab1:
-        if player_data.empty:
-            st.warning("No season stats available for this player.")
-        elif selected_stat not in player_data.columns:
-            st.warning(f"No data available for {selected_stat}.")
-        else:
-            player_data = player_data.sort_values(by='Season')
-            valid_rows = player_data[selected_stat].apply(lambda x: pd.notnull(x) and str(x).replace('.', '', 1).isdigit())
-            filtered_data = player_data[valid_rows]
-            filtered_data = filtered_data.drop_duplicates(subset=['Season'], keep='first')
-            stat_values = pd.to_numeric(filtered_data[selected_stat], errors='coerce').fillna(0).tolist()
-            if not any(stat_values):
-               st.warning(f"No valid {selected_stat} data to plot.")
+        with tabs_placeholder.container():
+            tab1, tab2 = st.tabs(["Stats Chart", "Career Accolades"])
 
-            combined_x_labels = []
-            for _, row in filtered_data.iterrows():
-                season_label = str(row['Season'])
-                team_label = str(row['Team'])
-                combined_x_labels.append(f"{season_label}\n\n{team_label}")
-
-            else:
-                trace = go.Scatter(
-                    x=combined_x_labels,
-                    y=stat_values,
-                    mode='lines+markers',
-                    name=selected_stat,
-                    line=dict(color='firebrick', width=2),
-                    marker=dict(size=8)
-                )
-                layout = go.Layout(
-                    title=f'{selected_stat} per Season for {profile.get("full_name", selected_full_name)}',
-                    xaxis=dict(title='Season', type='category'),
-                    yaxis=dict(title=selected_stat, rangemode='tozero'),
-                    margin=dict(t=50, b=50),
-                    hovermode='x unified'
-                )
-                fig = go.Figure(data=[trace], layout=layout)
-                st.plotly_chart(fig, use_container_width=True)
-
-    with tab2:
-        st.subheader("Accolades Summary")
-
-        accolade_keys = ['Championships', 'MVP', 'All-NBA', 'All-Star', 'All-Defensive', 'DPOY', 'ROY', '6MOTY']
-        categories_display = {k: profile.get(k, {'count': 0, 'years': []}) for k in accolade_keys}
-        finals_mvp = profile.get('Finals MVP', {'count': 0, 'years': []})
-
-        if categories_display:
-            grid_html = "<div class='acc-grid'>"
-            for k, data in categories_display.items():
-                count = data['count']
-                years = data['years']
-                years_str = ", ".join(years)
-                years_html = ""
-                if years_str:
-                    years_html = f"<div class='year-item'>( {years_str} )</div>"
-
-                if k == 'Championships':
-                    if count > 0:
-                        grid_html += (f"<div class='champ-item acc-focus champ-glow'>"
-                                    f"<div class='champ-label' style='color:#FFD700;'>{k}</div>"
-                                    f"<div style='color:#FFD700;'>{count}</div>"
-                                    f"{years_html}"
-                                    "</div>")
-                    else:
-                        grid_html += (f"<div class='champ-item'>"
-                                    f"<div class='champ-label' style='color:#EEEEEE;'>{k}</div>"
-                                    f"<div style='color:#EEEEEE;'>{count}</div>"
-                                    f"{years_html}"
-                                    "</div>")
+            with tab1:
+                if player_data.empty:
+                    st.warning("No season stats available for this player.")
                 else:
-                    if count > 0:
-                        grid_html += (f"<div class='acc-item acc-focus acc-glow'>"
-                                    f"<div class='acc-label' style='color:#FF4500;'>{k}</div>"
-                                    f"<div style='color:#FF4500;;'>{count}</div>"
-                                    f"{years_html}"
-                                    "</div>")
-                    else:
-                        grid_html += (f"<div class='acc-item'>"
-                                    f"<div class='acc-label' style='color:#EEEEEE;'>{k}</div>"
-                                    f"<div style='color:#EEEEEE;'>{count}</div>"
-                                    f"{years_html}"
-                                    "</div>")
-            grid_html += "</div>"
+                    chart_placeholder = st.empty()
+                    player_data = player_data.sort_values(by='Season')
+                    valid_rows = player_data[selected_stat].apply(lambda x: pd.notnull(x) and str(x).replace('.', '', 1).isdigit())
+                    filtered_data = player_data[valid_rows].drop_duplicates(subset=['Season'], keep='first')
+                    stat_values = pd.to_numeric(filtered_data[selected_stat], errors='coerce').fillna(0).tolist()
+                    combined_x_labels = [f"{row['Season']}\n\n{row['Team']}" for _, row in filtered_data.iterrows()]
+                    trace = go.Scatter(
+                        x=combined_x_labels,
+                        y=stat_values,
+                        mode='lines+markers',
+                        name=selected_stat,
+                        line=dict(color='firebrick', width=2),
+                        marker=dict(size=8)
+                    )
+                    layout = go.Layout(
+                        title=f'{selected_stat} per Season for {profile.get("full_name", selected_full_name)}',
+                        xaxis=dict(title='Season', type='category'),
+                        yaxis=dict(title=selected_stat, rangemode='tozero'),
+                        margin=dict(t=50, b=50),
+                        hovermode='x unified'
+                    )
+                    fig = go.Figure(data=[trace], layout=layout)
+                    chart_placeholder.empty()
+                    chart_placeholder.plotly_chart(fig, use_container_width=True)
 
-            st.markdown(grid_html, unsafe_allow_html=True)
-        else:
-            st.write("No accolades found.")
+            with tab2:
+                st.subheader("Accolades Summary")
+                accolade_keys = ['Championships', 'MVP', 'All-NBA', 'All-Star', 'All-Defensive', 'DPOY', 'ROY', '6MOTY']
+                categories_display = {k: profile.get(k, {'count': 0, 'years': []}) for k in accolade_keys}
+
+                if categories_display:
+                    grid_html = "<div class='acc-grid'>"
+                    for k, data in categories_display.items():
+                        count = data['count']
+                        years = data['years']
+                        years_str = ", ".join(years)
+                        years_html = f"<div class='year-item'>( {years_str} )</div>" if years_str else ""
+
+                        if k == 'Championships':
+                            css_class = "champ-item"
+                            label_class = "champ-label"
+                            glow_class = "acc-focus champ-glow" if count > 0 else ""
+                        else:
+                            css_class = "acc-item"
+                            label_class = "acc-label"
+                            glow_class = "acc-focus acc-glow" if count > 0 else ""
+
+                        grid_html += (
+                            f"<div class='{css_class} {glow_class.strip()}'>"
+                            f"<div class='{label_class}'>{k}</div>"
+                            f"<div>{count}</div>"
+                            f"{years_html}"
+                            "</div>"
+                        )
+                    grid_html += "</div>"
+
+                    st.markdown(grid_html, unsafe_allow_html=True)
+                else:
+                    st.write("No accolades found.")
+else:
+    content_placeholder.empty()
+    tabs_placeholder.empty()
 
 st.sidebar.markdown("---")
-
 st.sidebar.title("Useful links")
-st.sidebar.markdown( "Using data from :\n\n [Basketball Reference](https://www.basketball-reference.com/)")
-st.sidebar.markdown( "Github repository :\n\n [Basketball Player Dashboard](https://github.com/JovanPaic/basketball-player-dashboard)")
-
-
+st.sidebar.markdown("Using data from :\n\n [Basketball Reference](https://www.basketball-reference.com/)")
+st.sidebar.markdown("Github repository :\n\n [Basketball Player Dashboard](https://github.com/JovanPaic/basketball-player-dashboard)")
 st.sidebar.markdown("---")
-
 st.sidebar.markdown("Built with Streamlit and Plotly")
 st.sidebar.markdown("Made by Jovan Paić")
-
-
-

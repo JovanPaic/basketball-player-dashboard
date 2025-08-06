@@ -29,11 +29,12 @@
     padding: 20px 0;
     border-radius: 12px;
     background: #222831;
-    color: #FFD700;
+    color: #EEEEEE;
     box-shadow: 0 2px 12px #0003;
     transition: box-shadow 0.2s, background 0.2s;
 }
 .champ-glow {
+    color: #FFD700;
     background: #393E46;
     box-shadow: 0 0 20px 4px #FFD70099, 0 2px 12px #0003;
 }
@@ -51,4 +52,32 @@
     font-size: 0.4em;
     color: #AAAAAA;
     margin-top: -5px;
+}
+
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #ff4b4b;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader-text {
+  font-size: 24px;
+  margin-top: 0; 
 }
