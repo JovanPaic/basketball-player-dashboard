@@ -399,8 +399,10 @@ if profile:
 
 st.sidebar.markdown("---")
 
-st.sidebar.markdown("Using data from :")
-st.sidebar.page_link( "https://www.basketball-reference.com/",label="Basketball Reference", icon="🏀")
+st.sidebar.title("Useful links")
+st.sidebar.markdown( "Using data from :\n\n [Basketball Reference](https://www.basketball-reference.com/)")
+st.sidebar.markdown( "Github repository :\n\n [Basketball Player Dashboard](https://github.com/JovanPaic/basketball-player-dashboard)")
+
 
 st.sidebar.markdown("---")
 
