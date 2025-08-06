@@ -374,4 +374,5 @@ if profile:
             st.write("No accolades found.")
 
 st.sidebar.markdown("---")
+st.sidebar.markdown("Made by Jovan Paić")
 st.sidebar.markdown("Built with 🏀 Streamlit and Plotly")
