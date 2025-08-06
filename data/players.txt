@@ -1,4 +1,4 @@
-Precious Achiuwa | https://www.basketball-reference.com/players/a/achiupr01.html
+﻿Precious Achiuwa | https://www.basketball-reference.com/players/a/achiupr01.html
 Steven Adams | https://www.basketball-reference.com/players/a/adamsst01.html
 Bam Adebayo | https://www.basketball-reference.com/players/a/adebaba01.html
 Ochai Agbaji | https://www.basketball-reference.com/players/a/agbajoc01.html
@@ -55,7 +55,7 @@ Reece Beekman | https://www.basketball-reference.com/players/b/beekmre01.html
 Jordan Bell | https://www.basketball-reference.com/players/b/belljo01.html
 DeAndre' Bembry | https://www.basketball-reference.com/players/b/bembrde01.html
 Jules Bernard | https://www.basketball-reference.com/players/b/bernaju01.html
-DÄvis BertÄns | https://www.basketball-reference.com/players/b/bertada01.html
+Dāvis Bertāns | https://www.basketball-reference.com/players/b/bertada01.html
 Patrick Beverley | https://www.basketball-reference.com/players/b/beverpa01.html
 Saddiq Bey | https://www.basketball-reference.com/players/b/beysa01.html
 Tyler Bey | https://www.basketball-reference.com/players/b/beyty01.html
@@ -66,8 +66,8 @@ Bismack Biyombo | https://www.basketball-reference.com/players/b/biyombi01.html
 Anthony Black | https://www.basketball-reference.com/players/b/blackan01.html
 Leaky Black | https://www.basketball-reference.com/players/b/blackle01.html
 Buddy Boeheim | https://www.basketball-reference.com/players/b/boehebu01.html
-Bogdan BogdanoviÄ | https://www.basketball-reference.com/players/b/bogdabo01.html
-Bojan BogdanoviÄ | https://www.basketball-reference.com/players/b/bogdabo02.html
+Bogdan Bogdanović | https://www.basketball-reference.com/players/b/bogdabo01.html
+Bojan Bogdanović | https://www.basketball-reference.com/players/b/bogdabo02.html
 Bol Bol | https://www.basketball-reference.com/players/b/bolbo01.html
 Marques Bolden | https://www.basketball-reference.com/players/b/boldema01.html
 Leandro Bolmaro | https://www.basketball-reference.com/players/b/bolmale01.html
@@ -122,7 +122,7 @@ Jamal Cain | https://www.basketball-reference.com/players/c/cainja01.html
 Kentavious Caldwell-Pope | https://www.basketball-reference.com/players/c/caldwke01.html
 Toumani Camara | https://www.basketball-reference.com/players/c/camarto01.html
 Facundo Campazzo | https://www.basketball-reference.com/players/c/campafa01.html
-Vlatko ÄanÄar | https://www.basketball-reference.com/players/c/cancavl01.html
+Vlatko Čančar | https://www.basketball-reference.com/players/c/cancavl01.html
 Devin Cannady | https://www.basketball-reference.com/players/c/cannade01.html
 Clint Capela | https://www.basketball-reference.com/players/c/capelca01.html
 Vernon Carey Jr. | https://www.basketball-reference.com/players/c/careyve01.html
@@ -198,7 +198,7 @@ Matthew Dellavedova | https://www.basketball-reference.com/players/d/dellama01.h
 Dexter Dennis | https://www.basketball-reference.com/players/d/dennide01.html
 RayJ Dennis | https://www.basketball-reference.com/players/d/dennira01.html
 Donte DiVincenzo | https://www.basketball-reference.com/players/d/divindo01.html
-Moussa DiabatÃ© | https://www.basketball-reference.com/players/d/diabamo01.html
+Moussa Diabaté | https://www.basketball-reference.com/players/d/diabamo01.html
 Mamadi Diakite | https://www.basketball-reference.com/players/d/diakima01.html
 Cheick Diallo | https://www.basketball-reference.com/players/d/diallch01.html
 Hamidou Diallo | https://www.basketball-reference.com/players/d/diallha01.html
@@ -206,7 +206,7 @@ Gradey Dick | https://www.basketball-reference.com/players/d/dickgr01.html
 Ousmane Dieng | https://www.basketball-reference.com/players/d/diengou01.html
 Rob Dillingham | https://www.basketball-reference.com/players/d/dilliro01.html
 Spencer Dinwiddie | https://www.basketball-reference.com/players/d/dinwisp01.html
-Luka DonÄiÄ | https://www.basketball-reference.com/players/d/doncilu01.html
+Luka Dončić | https://www.basketball-reference.com/players/d/doncilu01.html
 Tyler Dorsey | https://www.basketball-reference.com/players/d/dorsety01.html
 Luguentz Dort | https://www.basketball-reference.com/players/d/dortlu01.html
 Ayo Dosunmu | https://www.basketball-reference.com/players/d/dosunay01.html
@@ -338,8 +338,8 @@ Killian Hayes | https://www.basketball-reference.com/players/h/hayeski01.html
 Scoot Henderson | https://www.basketball-reference.com/players/h/hendesc01.html
 Taylor Hendricks | https://www.basketball-reference.com/players/h/hendrta01.html
 Dewan Hernandez | https://www.basketball-reference.com/players/h/hernade01.html
-Juancho HernangÃ³mez | https://www.basketball-reference.com/players/h/hernaju01.html
-Willy HernangÃ³mez | https://www.basketball-reference.com/players/h/hernawi01.html
+Juancho Hernangómez | https://www.basketball-reference.com/players/h/hernaju01.html
+Willy Hernangómez | https://www.basketball-reference.com/players/h/hernawi01.html
 Tyler Herro | https://www.basketball-reference.com/players/h/herroty01.html
 Kevin Hervey | https://www.basketball-reference.com/players/h/herveke01.html
 Buddy Hield | https://www.basketball-reference.com/players/h/hieldbu01.html
@@ -412,7 +412,7 @@ Keon Johnson | https://www.basketball-reference.com/players/j/johnske07.html
 Keshad Johnson | https://www.basketball-reference.com/players/j/johnske10.html
 Keyontae Johnson | https://www.basketball-reference.com/players/j/johnske08.html
 Stanley Johnson | https://www.basketball-reference.com/players/j/johnsst04.html
-Nikola JokiÄ | https://www.basketball-reference.com/players/j/jokicni01.html
+Nikola Jokić | https://www.basketball-reference.com/players/j/jokicni01.html
 Carlik Jones | https://www.basketball-reference.com/players/j/jonesca03.html
 Colby Jones | https://www.basketball-reference.com/players/j/jonesco02.html
 Damian Jones | https://www.basketball-reference.com/players/j/jonesda03.html
@@ -428,7 +428,7 @@ Tre Jones | https://www.basketball-reference.com/players/j/jonestr01.html
 Tyus Jones | https://www.basketball-reference.com/players/j/jonesty01.html
 DeAndre Jordan | https://www.basketball-reference.com/players/j/jordade01.html
 Cory Joseph | https://www.basketball-reference.com/players/j/josepco01.html
-Nikola JoviÄ | https://www.basketball-reference.com/players/j/jovicni01.html
+Nikola Jović | https://www.basketball-reference.com/players/j/jovicni01.html
 Johnny Juzang | https://www.basketball-reference.com/players/j/juzanjo01.html
 Mfiondu Kabengele | https://www.basketball-reference.com/players/k/kabenmf01.html
 Frank Kaminsky | https://www.basketball-reference.com/players/k/kaminfr01.html
@@ -485,15 +485,15 @@ Didi Louzada | https://www.basketball-reference.com/players/l/louzama01.html
 Kevin Love | https://www.basketball-reference.com/players/l/loveke01.html
 Kyle Lowry | https://www.basketball-reference.com/players/l/lowryky01.html
 Seth Lundy | https://www.basketball-reference.com/players/l/lundyse01.html
-TimothÃ© Luwawu-Cabarrot | https://www.basketball-reference.com/players/l/luwawti01.html
+Timothé Luwawu-Cabarrot | https://www.basketball-reference.com/players/l/luwawti01.html
 Trey Lyles | https://www.basketball-reference.com/players/l/lylestr01.html
-ThÃ©o Maledon | https://www.basketball-reference.com/players/m/maledth01.html
+Théo Maledon | https://www.basketball-reference.com/players/m/maledth01.html
 Sandro Mamukelashvili | https://www.basketball-reference.com/players/m/mamuksa01.html
-Karim ManÃ© | https://www.basketball-reference.com/players/m/maneka01.html
+Karim Mané | https://www.basketball-reference.com/players/m/maneka01.html
 Terance Mann | https://www.basketball-reference.com/players/m/mannte01.html
 Tre Mann | https://www.basketball-reference.com/players/m/manntr01.html
 Nico Mannion | https://www.basketball-reference.com/players/m/mannini01.html
-Boban MarjanoviÄ | https://www.basketball-reference.com/players/m/marjabo01.html
+Boban Marjanović | https://www.basketball-reference.com/players/m/marjabo01.html
 Lauri Markkanen | https://www.basketball-reference.com/players/m/markkla01.html
 Naji Marshall | https://www.basketball-reference.com/players/m/marshna01.html
 Caleb Martin | https://www.basketball-reference.com/players/m/martica02.html
@@ -505,7 +505,7 @@ Tyrese Martin | https://www.basketball-reference.com/players/m/martity01.html
 Garrison Mathews | https://www.basketball-reference.com/players/m/mathega01.html
 Dakota Mathias | https://www.basketball-reference.com/players/m/mathida01.html
 Bennedict Mathurin | https://www.basketball-reference.com/players/m/mathube01.html
-Karlo MatkoviÄ | https://www.basketball-reference.com/players/m/matkoka01.html
+Karlo Matković | https://www.basketball-reference.com/players/m/matkoka01.html
 Wesley Matthews | https://www.basketball-reference.com/players/m/matthwe02.html
 Tyrese Maxey | https://www.basketball-reference.com/players/m/maxeyty01.html
 Skylar Mays | https://www.basketball-reference.com/players/m/mayssk01.html
@@ -531,7 +531,7 @@ De'Anthony Melton | https://www.basketball-reference.com/players/m/meltode01.htm
 Nathan Mensah | https://www.basketball-reference.com/players/m/mensana01.html
 Sam Merrill | https://www.basketball-reference.com/players/m/merrisa01.html
 Chimezie Metu | https://www.basketball-reference.com/players/m/metuch01.html
-Vasilije MiciÄ | https://www.basketball-reference.com/players/m/micicva01.html
+Vasilije Micić | https://www.basketball-reference.com/players/m/micicva01.html
 Khris Middleton | https://www.basketball-reference.com/players/m/middlkh01.html
 Eric Mika | https://www.basketball-reference.com/players/m/mikaer01.html
 Brandon Miller | https://www.basketball-reference.com/players/m/millebr02.html
@@ -590,7 +590,7 @@ Jaylen Nowell | https://www.basketball-reference.com/players/n/nowelja01.html
 Markquis Nowell | https://www.basketball-reference.com/players/n/nowelma01.html
 Frank Ntilikina | https://www.basketball-reference.com/players/n/ntilila01.html
 Kendrick Nunn | https://www.basketball-reference.com/players/n/nunnke01.html
-Jusuf NurkiÄ | https://www.basketball-reference.com/players/n/nurkiju01.html
+Jusuf Nurkić | https://www.basketball-reference.com/players/n/nurkiju01.html
 David Nwaba | https://www.basketball-reference.com/players/n/nwabada01.html
 Jordan Nwora | https://www.basketball-reference.com/players/n/nworajo01.html
 Royce O'Neale | https://www.basketball-reference.com/players/o/onealro01.html
@@ -617,10 +617,10 @@ Cameron Payne | https://www.basketball-reference.com/players/p/payneca01.html
 Elfrid Payton | https://www.basketball-reference.com/players/p/paytoel01.html
 Gary Payton II | https://www.basketball-reference.com/players/p/paytoga02.html
 Norvel Pelle | https://www.basketball-reference.com/players/p/pelleno01.html
-MÃ£ozinha Pereira | https://www.basketball-reference.com/players/p/pereima01.html
+Mãozinha Pereira | https://www.basketball-reference.com/players/p/pereima01.html
 Reggie Perry | https://www.basketball-reference.com/players/p/perryre01.html
 Drew Peterson | https://www.basketball-reference.com/players/p/peterdr01.html
-Filip PetruÅ¡ev | https://www.basketball-reference.com/players/p/petrufi01.html
+Filip Petrušev | https://www.basketball-reference.com/players/p/petrufi01.html
 Julian Phillips | https://www.basketball-reference.com/players/p/phillju01.html
 Jalen Pickett | https://www.basketball-reference.com/players/p/pickeja02.html
 Jamorko Pickett | https://www.basketball-reference.com/players/p/pickeja01.html
@@ -639,7 +639,7 @@ Jontay Porter | https://www.basketball-reference.com/players/p/portejo01.html
 Kevin Porter Jr. | https://www.basketball-reference.com/players/p/porteke02.html
 Michael Porter Jr. | https://www.basketball-reference.com/players/p/portemi01.html
 Bobby Portis | https://www.basketball-reference.com/players/p/portibo01.html
-Kristaps PorziÅÄ£is | https://www.basketball-reference.com/players/p/porzikr01.html
+Kristaps Porziņģis | https://www.basketball-reference.com/players/p/porzikr01.html
 Quinten Post | https://www.basketball-reference.com/players/p/postqu01.html
 Micah Potter | https://www.basketball-reference.com/players/p/pottemi01.html
 Dwight Powell | https://www.basketball-reference.com/players/p/poweldw01.html
@@ -653,7 +653,7 @@ Zyon Pullin | https://www.basketball-reference.com/players/p/pullizy01.html
 Trevelin Queen | https://www.basketball-reference.com/players/q/queentr01.html
 Neemias Queta | https://www.basketball-reference.com/players/q/quetane01.html
 Immanuel Quickley | https://www.basketball-reference.com/players/q/quickim01.html
-Lester QuiÃ±ones | https://www.basketball-reference.com/players/q/quinole01.html
+Lester Quiñones | https://www.basketball-reference.com/players/q/quinole01.html
 Jahmi'us Ramsey | https://www.basketball-reference.com/players/r/ramseja01.html
 Chasson Randle | https://www.basketball-reference.com/players/r/randlch01.html
 Julius Randle | https://www.basketball-reference.com/players/r/randlju01.html
@@ -688,23 +688,23 @@ Rayan Rupert | https://www.basketball-reference.com/players/r/ruperra01.html
 D'Angelo Russell | https://www.basketball-reference.com/players/r/russeda01.html
 Matt Ryan | https://www.basketball-reference.com/players/r/ryanma01.html
 Domantas Sabonis | https://www.basketball-reference.com/players/s/sabondo01.html
-Tidjane SalaÃ¼n | https://www.basketball-reference.com/players/s/salauti01.html
-Luka Å amaniÄ | https://www.basketball-reference.com/players/s/samanlu01.html
+Tidjane Salaün | https://www.basketball-reference.com/players/s/salauti01.html
+Luka Šamanić | https://www.basketball-reference.com/players/s/samanlu01.html
 Brandon Sampson | https://www.basketball-reference.com/players/s/sampsbr01.html
 Jermaine Samuels | https://www.basketball-reference.com/players/s/samueje01.html
 Adama Sanogo | https://www.basketball-reference.com/players/s/sanogad01.html
 Gui Santos | https://www.basketball-reference.com/players/s/santogu01.html
-Dario Å ariÄ | https://www.basketball-reference.com/players/s/saricda01.html
+Dario Šarić | https://www.basketball-reference.com/players/s/saricda01.html
 Alex Sarr | https://www.basketball-reference.com/players/s/sarral01.html
 Olivier Sarr | https://www.basketball-reference.com/players/s/sarrol01.html
 Marcus Sasser | https://www.basketball-reference.com/players/s/sassema01.html
 Jordan Schakel | https://www.basketball-reference.com/players/s/schakjo01.html
 Baylor Scheierman | https://www.basketball-reference.com/players/s/scheiba01.html
 Admiral Schofield | https://www.basketball-reference.com/players/s/schofad01.html
-Dennis SchrÃ¶der | https://www.basketball-reference.com/players/s/schrode01.html
+Dennis Schröder | https://www.basketball-reference.com/players/s/schrode01.html
 Jay Scrubb | https://www.basketball-reference.com/players/s/scrubja01.html
 Dereon Seabron | https://www.basketball-reference.com/players/s/seabrde01.html
-Alperen ÅengÃ¼n | https://www.basketball-reference.com/players/s/sengual01.html
+Alperen Şengün | https://www.basketball-reference.com/players/s/sengual01.html
 Brice Sensabaugh | https://www.basketball-reference.com/players/s/sensabr01.html
 Collin Sexton | https://www.basketball-reference.com/players/s/sextoco01.html
 Landry Shamet | https://www.basketball-reference.com/players/s/shamela01.html
@@ -728,7 +728,7 @@ Jericho Sims | https://www.basketball-reference.com/players/s/simsje01.html
 Deividas Sirvydis | https://www.basketball-reference.com/players/s/sirvyde01.html
 Dmytro Skapintsev | https://www.basketball-reference.com/players/s/skapidm01.html
 Jalen Slawson | https://www.basketball-reference.com/players/s/slawsja01.html
-Alen SmailagiÄ | https://www.basketball-reference.com/players/s/smailal01.html
+Alen Smailagić | https://www.basketball-reference.com/players/s/smailal01.html
 Javonte Smart | https://www.basketball-reference.com/players/s/smartja01.html
 Marcus Smart | https://www.basketball-reference.com/players/s/smartma01.html
 Dennis Smith Jr. | https://www.basketball-reference.com/players/s/smithde03.html
@@ -786,7 +786,7 @@ Jacob Toppin | https://www.basketball-reference.com/players/t/toppija01.html
 Obi Toppin | https://www.basketball-reference.com/players/t/toppiob01.html
 Juan Toscano-Anderson | https://www.basketball-reference.com/players/t/toscaju01.html
 Karl-Anthony Towns | https://www.basketball-reference.com/players/t/townska01.html
-Armel TraorÃ© | https://www.basketball-reference.com/players/a/armeltr01.html
+Armel Traoré | https://www.basketball-reference.com/players/a/armeltr01.html
 Luke Travers | https://www.basketball-reference.com/players/t/travelu01.html
 Gary Trent Jr. | https://www.basketball-reference.com/players/t/trentga02.html
 Oscar Tshiebwe | https://www.basketball-reference.com/players/t/tshieos01.html
@@ -796,7 +796,7 @@ Myles Turner | https://www.basketball-reference.com/players/t/turnemy01.html
 Hunter Tyson | https://www.basketball-reference.com/players/t/tysonhu01.html
 Jaylon Tyson | https://www.basketball-reference.com/players/t/tysonja01.html
 Stanley Umude | https://www.basketball-reference.com/players/u/umudest01.html
-Jonas ValanÄiÅ«nas | https://www.basketball-reference.com/players/v/valanjo01.html
+Jonas Valančiūnas | https://www.basketball-reference.com/players/v/valanjo01.html
 Denzel Valentine | https://www.basketball-reference.com/players/v/valende01.html
 Fred VanVleet | https://www.basketball-reference.com/players/v/vanvlfr01.html
 Jarred Vanderbilt | https://www.basketball-reference.com/players/v/vandeja01.html
@@ -804,7 +804,7 @@ Devin Vassell | https://www.basketball-reference.com/players/v/vassede01.html
 Sasha Vezenkov | https://www.basketball-reference.com/players/v/vezenal01.html
 Gabe Vincent | https://www.basketball-reference.com/players/v/vincega01.html
 Noah Vonleh | https://www.basketball-reference.com/players/v/vonleno01.html
-Nikola VuÄeviÄ | https://www.basketball-reference.com/players/v/vucevni01.html
+Nikola Vučević | https://www.basketball-reference.com/players/v/vucevni01.html
 Tristan Vukcevic | https://www.basketball-reference.com/players/v/vukcetr01.html
 Dean Wade | https://www.basketball-reference.com/players/w/wadede01.html
 Franz Wagner | https://www.basketball-reference.com/players/w/wagnefr01.html
